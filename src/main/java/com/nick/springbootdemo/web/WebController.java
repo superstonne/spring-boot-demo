@@ -18,7 +18,7 @@ public class WebController {
     @RequestMapping("/getUser")
     public User getUser() {
         User user = new User();
-        user.setName("Nick");
+        user.setUsername("Nick");
         user.setAge(18);
         user.setPassword("123456");
         return user;
@@ -35,7 +35,7 @@ public class WebController {
     @RequestMapping(value = "/get/{name}", method = RequestMethod.GET)
     public User get(@PathVariable String name) {
         User user = new User();
-        user.setName(name);
+        user.setUsername(name);
         return user;
     }
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class WebProperties {
 
-    @Value("${admin.name}")
+    @Value("${admin.username}")
     private String userName;
 
 
