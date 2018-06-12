@@ -14,8 +14,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
 @Component
 public interface UserRepository extends JpaRepository<User, Long> {
 
