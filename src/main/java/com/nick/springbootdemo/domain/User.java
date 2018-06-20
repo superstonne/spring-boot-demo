@@ -1,6 +1,7 @@
 package com.nick.springbootdemo.domain;
 
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 

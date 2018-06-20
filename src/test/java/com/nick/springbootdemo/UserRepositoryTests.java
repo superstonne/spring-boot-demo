@@ -1,7 +1,7 @@
 package com.nick.springbootdemo;
 
 import com.nick.springbootdemo.domain.User;
-import com.nick.springbootdemo.repository.UserRepository;
+import com.nick.springbootdemo.repository.repo1.UserRepository1;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ import static java.text.DateFormat.LONG;
 public class UserRepositoryTests {
 
     @Resource
-    private UserRepository userRepository;
+    private UserRepository1 userRepository;
 
     @Test
     public void test() {
