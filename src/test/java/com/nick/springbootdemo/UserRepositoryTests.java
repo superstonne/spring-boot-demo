@@ -1,6 +1,5 @@
 package com.nick.springbootdemo;
 
-import apple.laf.JRSUIConstants;
 import com.nick.springbootdemo.domain.User;
 import com.nick.springbootdemo.repository.UserRepository;
 import org.junit.Assert;
@@ -33,11 +32,11 @@ public class UserRepositoryTests {
         DateFormat dateFormat = DateFormat.getDateTimeInstance(LONG, LONG);
         String formattedDate = dateFormat.format(date);
 
-        userRepository.save(new User("金龙", 18, "123456", "51512226441@qq.com", "Nick", formattedDate));
-        userRepository.save(new User("雪儿", 18, "123456", "28553075831@qq.com", "Shirley", formattedDate));
+//        userRepository.save(new User("金龙", 18, "123456", "51512226441@qq.com", "Nick", formattedDate));
+//        userRepository.save(new User("雪儿", 18, "123456", "28553075831@qq.com", "Shirley", formattedDate));
 
         Assert.assertEquals(2, userRepository.findAll().size());
-        Assert.assertEquals("", userRepository.findByUsernameOrEmail("金龙", "515122644@qq.com"));
+        Assert.assertEquals(1, userRepository.findByUsernameOrEmail("金龙", "515122644@qq.com").getId());
     }
 
     @Test
@@ -52,17 +51,12 @@ public class UserRepositoryTests {
         int page = 1;
         int size = 1;
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = PageRequest.of(page, size, sort);
+        Pageable pageable = new PageRequest(page, size, sort);
 
         Page<User> res = userRepository.findAll(pageable);
         Iterator<User> iterator = res.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
-        }
-        res = userRepository.findAll(pageable.next());
-        Iterator<User> iterator1 = res.iterator();
-        while (iterator1.hasNext()) {
-            System.out.println(iterator1.next());
         }
     }
 }
