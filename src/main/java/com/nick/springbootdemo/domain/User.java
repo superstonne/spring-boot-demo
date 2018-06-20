@@ -1,14 +1,10 @@
 package com.nick.springbootdemo.domain;
 
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
@@ -44,6 +40,11 @@ public class User implements Serializable {
 
     @Column(nullable = false)
     private String regTime;
+
+    @Transient // This column will not associated with DB column
+    @Enumerated(EnumType.STRING) // This annotation will tell DB to save the enum's string value but number.
+    @Column(nullable = false)
+    private UserType userType;
 
     public User() {
     }
