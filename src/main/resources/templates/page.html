@@ -1,0 +1,12 @@
+<div th:if="${(users.totoalPages le 10) and (users.totalPages gt 0)}" th:remove="tag">
+    <div th:each="pg : ${#numbers.sequence(0, users.totalPages - 1)}}" th:remove="tag">
+        <span th:if="${pg eq users.getNumber()}" th:remove="tag">
+            <li class="active">
+                <span class="current_page line_height" th:text="${pg + 1}">${pageNumber}}</span>
+            </li>
+        </span>
+    </div>
+</div>
+<li th:if="${users.hasNext()}"><a href="#" th:href="@{$pageUrl}(page=${users.number + 1}})">Next Page</a></li>
+<li><a href="#" th:href="${users.totalPages le 0 ? pageUrl + 'page=0' : pageUrl + '&amp;page=' + (users.totalPages - 1)}}">Last Page</a></li>
+<li><span th:utext="'total' + ${users.totalPages} + 'page / ' + ${users.totalElements} + 'item'"></span></li>
