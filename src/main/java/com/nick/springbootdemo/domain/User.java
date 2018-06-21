@@ -18,17 +18,17 @@ public class User implements Serializable {
     @GeneratedValue
     private long id;
 
-    @NotEmpty(message = "姓名不能为空")
+//    @NotEmpty(message = "姓名不能为空")  validator logic should be in UserParam
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Max(value = 100, message = "Age shouldn't be bigger than 100")
-    @Min(value = 18, message = "Age should be bigger than 18")
+//    @Max(value = 100, message = "Age shouldn't be bigger than 100")
+//    @Min(value = 18, message = "Age should be bigger than 18")
     @Column
     private int age;
 
-    @NotEmpty(message = "Password shouldn't be empty")
-    @Length(min = 6, message = "Password should be more than 6")
+//    @NotEmpty(message = "Password shouldn't be empty")
+//    @Length(min = 6, message = "Password should be more than 6")
     @Column(nullable = false)
     private String password;
 

@@ -12,6 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public interface UserRepository1 extends JpaRepository<User, Long> {
 
+    User findById(long id);
+
+    @Query("select u from User u")
+    Page<User> findList(Pageable pageable);
 
     User findByUsername(String username);
 
