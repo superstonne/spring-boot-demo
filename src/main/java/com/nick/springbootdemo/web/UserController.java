@@ -54,16 +54,48 @@ public class UserController {
         BeanUtils.copyProperties(userParam, user);
         user.setRegTime(new Date().toString());
         userRepository.save(user);
-        return "redirect:/list";
+        return "redirect:/user/list";
     }
 
     @RequestMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") Integer page,
-                       @RequestParam(value = "size", defaultValue = "6") Integer size) {
+                       @RequestParam(value = "size", defaultValue = "2") Integer size) {
         Sort sort = new Sort(Sort.Direction.DESC, "id");
         Pageable pageable = new PageRequest(page, size, sort);
         Page<User> users = userRepository.findList(pageable);
         model.addAttribute("users", users);
         return "user/list";
+    }
+
+    @RequestMapping("/toEdit")
+    public String toEdit(Model model, Long id) {
+        User user = userRepository.findById(id);
+        model.addAttribute("user", user);
+        return "user/userEdit";
+    }
+
+    @RequestMapping("/edit")
+    public String edit(@Valid UserParam userParam, BindingResult result, ModelMap map) {
+        String errorMsg = "";
+        if (result.hasErrors()) {
+            List<ObjectError> list = result.getAllErrors();
+            for (ObjectError error : list) {
+                errorMsg += error.getCode() + "-" + error.getDefaultMessage();
+            }
+            map.addAttribute("errorMsg", errorMsg);
+            map.addAttribute("user", userParam);
+            return "user/userEdit";
+        }
+        User user = new User();
+        BeanUtils.copyProperties(userParam, user);
+        user.setRegTime(new Date().toString());
+        userRepository.save(user);
+        return "redirect:/user/list";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(long id) {
+        userRepository.delete(id);
+        return "redirect:/user/list";
     }
 }
